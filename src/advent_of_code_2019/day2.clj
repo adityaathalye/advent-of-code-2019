@@ -91,3 +91,48 @@
   (= (first (run-program day2-input))
      2842648) ;; correct answer
   )
+
+
+;; Part 2: Given that each instruction set may be parsed in constant widths of 4,
+;; and each instruction set is organised as 'opcode', 'noun', 'verb', 'output':
+;;
+;; Find the input noun and verb that cause the program to produce the
+;; output 19690720.
+;;
+;; What is 100 * noun + verb? (For example, if noun=12 and verb=2, the answer
+;; would be 1202.)
+
+(def noun-verb-pairs
+  (for [noun (range 100)
+        verb (range 100)]
+    [noun verb]))
+
+(def grav-assist-idx0-value 19690720)
+
+
+(defn init-program
+  "The inputs should still be provided to the program by replacing the values
+  at addresses 1 and 2, just like before. In this program, the value placed in
+  address 1 is called the noun, and the value placed in address 2 is called
+  the verb. Each of the two input values will be between 0 and 99, inclusive."
+  [[noun verb]]
+  (-> day2-input-raw
+      (assoc 1 noun)
+      (assoc 2 verb)))
+
+
+(defn gravity-assist?
+  "Once the program has halted, its output is available at address 0."
+  [program-listing]
+  (= (first (run-program program-listing))
+     grav-assist-idx0-value))
+
+(comment
+  (= 9074 ; correct answer
+     (->> (map init-program noun-verb-pairs)
+          (filter gravity-assist?)
+          first
+          (take opswidth) ; first instruction set
+          ((fn [[opcode noun verb result]]
+             (-> noun (* 100) (+ verb))))))
+  )
