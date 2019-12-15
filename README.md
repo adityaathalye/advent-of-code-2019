@@ -1,36 +1,16 @@
 # advent-of-code-2019
 
-FIXME: description
+My first time trying to solve Advent of Code.
 
-## Installation
-
-Download from http://example.com/FIXME.
+Let's see how far we can advent-ure...
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar advent-of-code-2019-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+Each "day" is its own ns, owing to all the reasons namespaces are good for.
 
 ## License
 
-Copyright © 2019 FIXME
+Copyright © 2019 Aditya Athalye
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
