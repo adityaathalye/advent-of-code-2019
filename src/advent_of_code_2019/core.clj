@@ -99,19 +99,16 @@
           (assoc program-listing result-idx result))))))
 
 
-(defn run-prog
-  ([program-listing]
-   (run-prog program-listing 0))
-  ([program-listing program-ctr]
-   (let [instruction-set (->> program-listing
-                              (drop (* program-ctr opswidth))
-                              (take opswidth))
-         next-program (update-program program-listing
-                                      instruction-set)]
-     (if next-program
-       (recur next-program
-              (inc program-ctr))
-       program-listing))))
+(defn run-program
+  [program-listing]
+  (reduce (fn [prog-lst program-ctr]
+            (let [instruction-set (->> prog-lst
+                                       (drop (* program-ctr opswidth))
+                                       (take opswidth))]
+              (or (update-program prog-lst instruction-set)
+                  (reduced prog-lst))))
+          program-listing
+          (range)))
 
 
 (comment
