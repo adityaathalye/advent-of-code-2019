@@ -38,9 +38,8 @@
 ;;   your spacecraft when also taking into account the mass of the added fuel?
 
 (defn module-fuel-2
-  "The fuel required for a module is: module mass, divide by three, round down, and subtract 2."
+  "Calculate module fuel to its tyrannous fixed point."
   [mass]
-  ;; we must toIntExact in order to avoid propagating floating point errors
   (->> mass
        (iterate module-fuel-1)
        rest
